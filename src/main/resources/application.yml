@@ -1,0 +1,18 @@
+server:
+  port: ${SERVER_PORT}
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: none
+grpc:
+  server:
+    port: ${GRPC_PORT}
+  client:
+    user-account-service:
+      address: localhost
+      port: 9000

@@ -1,0 +1,8 @@
+spring:
+  flyway:
+    enabled: false
+grpc:
+  client:
+    user-account-service:
+      address: localhost
+      port: 9000

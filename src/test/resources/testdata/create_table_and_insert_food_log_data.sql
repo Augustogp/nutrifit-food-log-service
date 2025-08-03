@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS food_log (
+    id BINARY(16) PRIMARY KEY,
+    user_id BINARY(16) NOT NULL,
+    date DATE NOT NULL,
+    CONSTRAINT uq_user_date UNIQUE (user_id, date)
+);
+
+INSERT INTO food_log (id, user_id, date) VALUES
+(UUID_TO_BIN('d1c6a214-7d7e-4d29-a9a9-58d6e1b623e0'), UUID_TO_BIN('f3c6a214-7d7e-4d29-a9a9-58d6e1b623e0'), '2023-10-01'),
+(UUID_TO_BIN('d2c6a214-7d7e-4d29-a9a9-58d6e1b623e0'), UUID_TO_BIN('f3c6a214-7d7e-4d29-a9a9-58d6e1b623e0'), '2023-10-02'),
+(UUID_TO_BIN('d3c6a214-7d7e-4d29-a9a9-58d6e1b623e0'), UUID_TO_BIN('f3c6a214-7d7e-4d29-a9a9-58d6e1b623e0'), '2023-10-03'),
+(UUID_TO_BIN('d4c6a214-7d7e-4d29-a9a9-58d6e1b623e0'), UUID_TO_BIN('f3c6a214-7d7e-4d29-a9a9-58d6e1b623e0'), '2023-10-04');
