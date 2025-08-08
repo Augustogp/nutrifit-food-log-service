@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Data
 public class GrpcUserAccountServiceProperties {
 
-    private String address;
+    private String host;
 
     private Integer port;
 }

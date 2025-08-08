@@ -2,17 +2,17 @@ server:
   port: ${SERVER_PORT}
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
 grpc:
   server:
     port: ${GRPC_PORT}
   client:
     user-account-service:
-      address: localhost
-      port: 9000
+      host: ${NUTRIFIT_USER_ACCOUNT_GRPC_HOST}
+      port: ${NUTRIFIT_USER_ACCOUNT_GRPC_PORT}
