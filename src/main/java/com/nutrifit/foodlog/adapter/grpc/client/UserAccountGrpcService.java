@@ -26,14 +26,14 @@ public class UserAccountGrpcService {
 
     private final GrpcUserAccountServiceProperties properties;
 
-    private String url;
-
-    private Integer port;
-
     @PostConstruct
     public void init() {
 
-        channel = ManagedChannelBuilder.forAddress(properties.getAddress(), properties.getPort()).usePlaintext().build();
+        log.info("Initializing UserAccount gRPC service client with address {}:{}", properties.getHost(), properties.getPort());
+
+        channel = ManagedChannelBuilder.forAddress(properties.getHost(), properties.getPort())
+                .usePlaintext()
+                .build();
 
         blockingStub = UserAccountServiceGrpc.newBlockingStub(channel);
     }
@@ -51,7 +51,8 @@ public class UserAccountGrpcService {
 
     public GrpcUserAccountResponse getUserAccount(UUID userId) {
         log.info("Calling gRPC UserAccountService for userId: {}", userId);
-        return grpcExceptionHandler.handle("User", userId, () -> blockingStub.getUserAccountById(com.nutrifit.useraccount.v1.GetUserAccountByIdRequest.newBuilder()
+        return grpcExceptionHandler.handle("User", userId, () -> blockingStub.getUserAccountById(com.nutrifit.useraccount.v1.GetUserAccountByIdRequest
+                .newBuilder()
                 .setUserId(userId.toString())
                 .build()));
     }

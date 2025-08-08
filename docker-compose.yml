@@ -3,10 +3,10 @@ services:
     image: 'mysql:8.0'
     container_name: mysql-food-log-service
     environment:
-      MYSQL_ROOT_PASSWORD: 'rootpass'
-      MYSQL_DATABASE: 'food_log'
-      MYSQL_USER: 'food_log_user'
-      MYSQL_PASSWORD: 'food_log_pass'
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: food_log
+      MYSQL_USER: food_log_user
+      MYSQL_PASSWORD: food_log_pass
     ports:
       - '3308:3306'
     volumes:
@@ -26,11 +26,15 @@ services:
       dockerfile: Dockerfile
     container_name: food-log-service
     environment:
-      SPRING_DATASOURCE_URL: 'jdbc:mysql://mysql-food-log-service:3306/food_log'
-      SPRING_DATASOURCE_USERNAME: 'food_log_user'
-      SPRING_DATASOURCE_PASSWORD: 'food_log_pass'
-      GRPC_PORT: '9003'
-      SERVER_PORT: '4003'
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-food-log-service:3306/food_log
+      SPRING_DATASOURCE_USERNAME: food_log_user
+      SPRING_DATASOURCE_PASSWORD: food_log_pass
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      NUTRIFIT_USER_ACCOUNT_GRPC_HOST: user-account-service
+      NUTRIFIT_USER_ACCOUNT_GRPC_PORT: 9000
+      GRPC_PORT: 9003
+      SERVER_PORT: 4003
     ports:
       - '4003:4003'
       - '9003:9003'
@@ -44,4 +48,4 @@ volumes:
   mysql_food_log_data:
 networks:
   nutrifit-network:
-      driver: bridge
+      external: true
